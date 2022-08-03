@@ -300,7 +300,7 @@ static uint8_t *allocateMutableWeightVars(const BundleConfig &config) {
 static void dumpInferenceResults(const BundleConfig &config,
                                  uint8_t *mutableWeightVars) {
   const SymbolTableEntry &outputWeights =
-      getMutableWeightVar(config, "gpu_0_softmax");
+      getMutableWeightVar(config, "resnetv24_dense0_fwd");
   int maxIdx = 0;
   float maxValue = 0;
   float *results = (float *)(mutableWeightVars + outputWeights.offset);
@@ -328,7 +328,7 @@ static uint8_t *initMutableWeightVars(const BundleConfig &config) {
   printf("Copying image data into mutable weight vars: %lu bytes\n",
          imageDataSizeInBytes);
   const SymbolTableEntry &inputGPUDataVar =
-      getMutableWeightVar(config, "gpu_0_data");
+      getMutableWeightVar(config, "data");
   memcpy(mutableWeightVarsAddr + inputGPUDataVar.offset, inputT,
          imageDataSizeInBytes);
   return mutableWeightVarsAddr;
